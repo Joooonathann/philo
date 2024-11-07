@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:13:40 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/05 01:12:49 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:55:29 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ static int	set_number(char **argv, t_data *data)
 		printf("[PHILO][ERROR] Input incorrect: Total number of philos must be 1 - %d\n", PH_MAX);
 		return (0);
 	}
-	data->time_to_die = ft_atol(argv[2]) * 1000;
-	data->time_to_eat = ft_atol(argv[3]) * 1000;
-	data->time_to_sleep = ft_atol(argv[4]) * 1000;
+	data->time_to_die = ft_atol(argv[2]);
+	data->time_to_eat = ft_atol(argv[3]);
+	data->time_to_sleep = ft_atol(argv[4]);
+	if (argv[5])
+		data->meals_total = ft_atol(argv[5]);
+	else
+		data->meals_total = -1;
 	return (1);
 }
 

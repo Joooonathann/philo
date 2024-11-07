@@ -6,11 +6,23 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:36:44 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/05 01:00:27 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:58:24 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long	get_time(void)
+{
+	struct timeval	current_time;
+
+	if (gettimeofday(&current_time, NULL) != 0)
+	{
+		printf("[PHILO][ERROR] Gettimeofday failed");
+		return (1);
+	}
+	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+}
 
 bool	whitespace(char c)
 {
@@ -24,7 +36,7 @@ bool	is_digit(char c)
 
 long	ft_atol(const char *s)
 {
-	long res;
+	long	res;
 
 	while (whitespace(*s))
 		s++;

@@ -5,6 +5,7 @@ INCLUDE 	=	-I include
 
 SRC			=	./src/is_valid_input.c\
 				./src/utils.c\
+				./src/init_simulation.c\
 				./philo.c
 				
 OBJ			=	${SRC:.c=.o}
