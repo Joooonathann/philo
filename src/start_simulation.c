@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   start_simulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 22:44:48 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/07 02:15:20 by jalbiser         ###   ########.fr       */
+/*   Created: 2024/11/07 01:41:35 by jalbiser          #+#    #+#             */
+/*   Updated: 2024/11/07 02:37:41 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	start_simulation(t_data *data)
 {
-	t_data	data;
+	int	i;
 
-	if (!get_data_numbers(argc, argv, &data) || !init_simulation(&data))
-		return (1);
-	start_simulation(&data);
-	int i = 0;
-	while (i < data.ph_total)
+	i = 0;
+	while (i < data->ph_total)
 	{
-		pthread_join(data.philos[i].philo, NULL);
+		printf("%d\n", i);
+		if (pthread_create(&data->philos[i].philo, NULL, process_philo,
+				(void *)&data->philos[i]))
+			exit (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }

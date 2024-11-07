@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:20:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/07 01:33:07 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/07 02:39:50 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ int	init_simulation(t_data *data)
 	while (i < data->ph_total)
 	{
 		data->philos[i].id = i;
-		data->philos[i].last_meal = 0;
+		data->philos[i].last_meal = get_time();
 		data->philos[i].meals_total = 0;
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->ph_total];
+		data->philos[i].data = data;
+		data->philos[i].is_dead = 0;
 		pthread_mutex_init(&data->forks[i].fork, NULL);
 		i++;
 	}

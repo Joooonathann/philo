@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:44:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/07 01:32:42 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/07 02:16:46 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include <sys/time.h>
 # include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 # define PH_MAX 200
 
@@ -32,6 +33,8 @@ typedef struct s_data
 	long				time_to_eat;
 	long				time_to_sleep;
 	long				meals_total;
+	int					is_ready;
+	int					is_end;
 	t_fork				*forks;
 	t_philo				*philos;
 }						t_data;
@@ -47,6 +50,7 @@ typedef struct s_philo
 	int					id;
 	long				last_meal;
 	long				meals_total;
+	int					is_dead;
 	pthread_t			philo;
 	t_fork				*left_fork;
 	t_fork				*right_fork;
@@ -59,5 +63,8 @@ bool					is_digit(char c);
 long					ft_atol(const char *s);
 long					get_time(void);
 int						init_simulation(t_data *data);
+void					*process_philo(void *arg);
+int						start_simulation(t_data *data);
+void					*process_philo(void *arg);
 
 #endif
