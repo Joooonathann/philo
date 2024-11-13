@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:44:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/07 04:10:17 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/13 07:03:46 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 	int					is_end;
 	t_fork				*forks;
 	t_philo				*philos;
+	pthread_t			monitor;
 }						t_data;
 
 typedef struct s_fork
@@ -66,7 +67,7 @@ int						init_simulation(t_data *data);
 void					*process_philo(void *arg);
 int						start_simulation(t_data *data);
 void					*process_philo(void *arg);
-void					wait_simulation(t_philo *philo);
-void					is_end(t_philo *philo);
+void					*is_end(void *arg);
+void					write_status(t_philo *philo, char *status);
 
 #endif

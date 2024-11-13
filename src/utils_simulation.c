@@ -6,28 +6,57 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 02:57:19 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/07 04:15:36 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:43:38 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	wait_simulation(t_philo *philo)
+static int	end_meal(t_data *data)
 {
-	if (philo->id == (philo->data->ph_total - 1))
-		philo->data->is_ready = 1;
-	while (!philo->data->is_ready)
-		;
+	int		i;
+
+	i = 0;
+	while (i < data->ph_total)
+	{
+		if (data->philos[i].meals_total < data->meals_total)
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-void	is_end(t_philo *philo)
+void	write_status(t_philo *philo, char *status)
 {
-	if ((get_time() - philo->last_meal) > philo->data->time_to_die)
+	if (philo->data->is_end)
+		return ;
+	printf("[PHILO] %ld %d %s\n", get_time(), philo->id, status);
+}
+
+void	*is_end(void *arg)
+{
+	t_data	*data;
+	int		i;
+
+	data = (t_data *)arg;
+	while (!data->is_end)
 	{
-		printf("[PHILO][%ld][%d] is dead\n", get_time(), philo->id);
-		philo->data->is_end = 1;
+		i = 0;
+		while (i < data->ph_total)
+		{
+			if ((get_time() - data->philos[i].last_meal) > data->time_to_die)
+			{
+				write_status(&data->philos[i], "died");
+				data->is_end = 1;
+				break ;
+			}
+			if (end_meal(data) && data->meals_total != -1)
+			{
+				data->is_end = 1;
+				break ;
+			}
+			i++;
+		}
 	}
-	if (philo->data->meals_total != -1
-		&& philo->data->meals_total > philo->meals_total)
-		philo->data->is_end = 1;
+	return (NULL);
 }
