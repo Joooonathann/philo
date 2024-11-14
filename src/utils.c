@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:36:44 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 10:12:10 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:36:32 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	clean_simulation(t_data *data)
 		i++;
 	}
 	pthread_join(data->monitor, NULL);
+	free_simulation(data);
 }

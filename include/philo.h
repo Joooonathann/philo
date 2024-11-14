@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:44:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 10:11:33 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:56:17 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void					*process_philo(void *arg);
 void					*is_end(void *arg);
 void					write_status(t_philo *philo, char *status);
 void					clean_simulation(t_data *data);
+void					free_simulation(t_data *data);
 
 #endif

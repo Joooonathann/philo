@@ -6,11 +6,34 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 02:57:19 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/13 09:43:38 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:56:06 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void free_simulation(t_data *data)
+{
+    int i;
+
+    if (data->forks)
+    {
+		i = 0;
+		while (i < data->ph_total)
+		{
+			pthread_mutex_destroy(&data->forks[i].fork);
+			i++;
+		}
+        free(data->forks);
+        data->forks = NULL;
+    }
+
+    if (data->philos)
+    {
+        free(data->philos);
+        data->philos = NULL;
+    }
+}
 
 static int	end_meal(t_data *data)
 {
