@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:44:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/13 07:03:46 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 08:55:03 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # include <limits.h>
 # include <pthread.h>
-# include <stdbool.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
 
-# define PH_MAX 200
+# define PH_MAX 410
 
 typedef struct s_fork	t_fork;
 typedef struct s_philo	t_philo;

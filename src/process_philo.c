@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:34 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/13 09:43:14 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 08:46:53 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,14 @@
 static void	think_process(t_philo *philo)
 {
 	write_status(philo, "is thinking");
-	usleep(philo->data->time_to_sleep * 1000);
 }
 
 static void	eat_process(t_philo *philo)
 {
-	if ((philo->id % 2) == 0)
-	{
 		pthread_mutex_lock(&philo->left_fork->fork);
 		write_status(philo, "has taken a fork");
 		pthread_mutex_lock(&philo->right_fork->fork);
 		write_status(philo, "has taken a fork");
-	}
-	else
-	{
-		pthread_mutex_lock(&philo->right_fork->fork);
-		write_status(philo, "has taken a fork");
-		pthread_mutex_lock(&philo->left_fork->fork);
-		write_status(philo, "has taken a fork");
-	}
 	philo->last_meal = get_time();
 	philo->meals_total++;
 	write_status(philo, "is eating");
@@ -48,6 +37,16 @@ static void	sleep_process(t_philo *philo)
 	usleep(philo->data->time_to_sleep * 1000);
 }
 
+static int	first_turn(t_data *data)
+{
+	static int	nbr_p = 0;
+
+	if (nbr_p == data->ph_total)
+		return (1);
+	else
+		nbr_p++;
+	return (0);
+}
 void	*process_philo(void *arg)
 {
 	t_philo	*philo;
@@ -55,9 +54,15 @@ void	*process_philo(void *arg)
 	philo = (t_philo *)arg;
 	while (!philo->data->is_end)
 	{
-		think_process(philo);
-		eat_process(philo);
+		if (first_turn(philo->data) == 0)
+		{
+			if (philo->id % 2 == 0)
+				eat_process(philo);
+		}
+		else
+			eat_process(philo);
 		sleep_process(philo);
+		think_process(philo);
 	}
 	return (NULL);
 }
