@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:20:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/13 09:43:48 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:29:44 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int	init_simulation(t_data *data)
 		data->philos[i].data = data;
 		data->philos[i].is_dead = 0;
 		pthread_mutex_init(&data->forks[i].fork, NULL);
+		pthread_mutex_init(&data->mtx_get, NULL);
+		pthread_mutex_init(&data->mtx_set, NULL);
+		pthread_mutex_init(&data->mtx_write, NULL);
 		i++;
 	}
 	return (1);

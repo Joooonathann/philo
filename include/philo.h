@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:44:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 11:56:17 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:24:45 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_data
 	long				meals_total;
 	int					is_ready;
 	int					is_end;
+	pthread_mutex_t		mtx_set;
+	pthread_mutex_t		mtx_get;
+	pthread_mutex_t		mtx_write;
 	t_fork				*forks;
 	t_philo				*philos;
 	pthread_t			monitor;
@@ -71,5 +74,7 @@ void					*is_end(void *arg);
 void					write_status(t_philo *philo, char *status);
 void					clean_simulation(t_data *data);
 void					free_simulation(t_data *data);
+int						get_value(int *value, t_data *data);
+void					set_value(int *value, int new, t_data *data);
 
 #endif

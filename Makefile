@@ -9,6 +9,7 @@ SRC			=	./src/is_valid_input.c\
 				./src/start_simulation.c\
 				./src/process_philo.c\
 				./src/utils_simulation.c\
+				./src/handler_values.c\
 				./philo.c
 				
 OBJ			=	${SRC:.c=.o}

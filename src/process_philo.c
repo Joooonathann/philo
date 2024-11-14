@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:34 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 11:56:13 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:32:58 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static int	first_turn(t_data *data)
 
 void	*process_philo(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (!philo->data->is_end)
+	while (!get_value(&philo->data->is_end, philo->data))
 	{
 		if (first_turn(philo->data) == 0)
 		{
