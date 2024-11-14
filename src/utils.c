@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:36:44 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/07 00:58:24 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 10:12:10 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,17 @@ long	ft_atol(const char *s)
 	while (is_digit(*s))
 		res = (res * 10) + (*s++ - '0');
 	return (res);
+}
+
+void	clean_simulation(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->ph_total)
+	{
+		pthread_join(data->philos[i].philo, NULL);
+		i++;
+	}
+	pthread_join(data->monitor, NULL);
 }

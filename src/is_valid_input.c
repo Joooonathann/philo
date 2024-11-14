@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:13:40 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/13 09:43:44 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 10:14:34 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	set_number(char **argv, t_data *data)
 	data->ph_total = ft_atol(argv[1]);
 	if (data->ph_total > PH_MAX)
 	{
-		printf("[PHILO][ERROR] Input incorrect: Total number of philos must be 1 - %d\n", PH_MAX);
+		printf("[PHILO][ERROR] Input incorrect\n");
 		return (0);
 	}
 	data->time_to_die = ft_atol(argv[2]);
@@ -43,7 +43,7 @@ static int	is_valid_number(char **argv)
 		z = ft_atol(argv[i]);
 		if (z > INT_MAX)
 		{
-			printf("[PHILO][ERROR] Input incorrect: Value cannot exceed 2147483647\n");
+			printf("[PHILO][ERROR] Input incorrect\n");
 			return (0);
 		}
 		if (z < 1)

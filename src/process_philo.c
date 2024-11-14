@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:34 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 08:46:53 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 10:13:21 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	think_process(t_philo *philo)
 
 static void	eat_process(t_philo *philo)
 {
-		pthread_mutex_lock(&philo->left_fork->fork);
-		write_status(philo, "has taken a fork");
-		pthread_mutex_lock(&philo->right_fork->fork);
-		write_status(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->left_fork->fork);
+	write_status(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->right_fork->fork);
+	write_status(philo, "has taken a fork");
 	philo->last_meal = get_time();
 	philo->meals_total++;
 	write_status(philo, "is eating");
@@ -47,6 +47,7 @@ static int	first_turn(t_data *data)
 		nbr_p++;
 	return (0);
 }
+
 void	*process_philo(void *arg)
 {
 	t_philo	*philo;

@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:44:48 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/07 02:15:20 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 10:10:36 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ int	main(int argc, char **argv)
 	if (!get_data_numbers(argc, argv, &data) || !init_simulation(&data))
 		return (1);
 	start_simulation(&data);
-	int i = 0;
-	while (i < data.ph_total)
-	{
-		pthread_join(data.philos[i].philo, NULL);
-		i++;
-	}
+	clean_simulation(&data);
 	return (0);
 }
