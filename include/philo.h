@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:44:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 12:24:45 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:57:17 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_data
 	long				time_to_eat;
 	long				time_to_sleep;
 	long				meals_total;
-	int					is_ready;
 	int					is_end;
 	pthread_mutex_t		mtx_set;
 	pthread_mutex_t		mtx_get;

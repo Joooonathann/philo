@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 00:13:40 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 10:14:34 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:57:10 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static int	set_number(char **argv, t_data *data)
 	data->time_to_die = ft_atol(argv[2]);
 	data->time_to_eat = ft_atol(argv[3]);
 	data->time_to_sleep = ft_atol(argv[4]);
-	data->is_ready = 0;
 	data->is_end = 0;
+	pthread_mutex_init(&data->mtx_get, NULL);
+	pthread_mutex_init(&data->mtx_set, NULL);
+	pthread_mutex_init(&data->mtx_write, NULL);
 	if (argv[5])
 		data->meals_total = ft_atol(argv[5]);
 	else
