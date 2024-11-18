@@ -6,11 +6,19 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:34 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/18 16:21:40 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:33:47 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	is_ready(t_philo *philo)
+{
+	if (philo->id == (philo->data->ph_total - 1))
+		set_value(&philo->data->is_ready, 1, philo->data);
+	while (!get_value(&philo->data->is_ready, philo->data))
+		;
+}
 
 static void	think_process(t_philo *philo)
 {
@@ -42,6 +50,7 @@ void	*process_philo(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	is_ready(philo);
 	if (philo->data->ph_total == 1)
 	{
 		write_status(philo, "is thinking");

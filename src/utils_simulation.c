@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 02:57:19 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 12:32:46 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:27:07 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,14 @@ static int	end_meal(t_data *data)
 
 void	write_status(t_philo *philo, char *status)
 {
+	pthread_mutex_lock(&philo->data->mtx_write);
 	if (philo->data->is_end)
+	{
+		pthread_mutex_unlock(&philo->data->mtx_write);
 		return ;
+	}
 	printf("[PHILO] %ld %d %s\n", get_time(), philo->id, status);
+	pthread_mutex_unlock(&philo->data->mtx_write);
 }
 
 void	*is_end(void *arg)
@@ -64,6 +69,8 @@ void	*is_end(void *arg)
 	int		i;
 
 	data = (t_data *)arg;
+	while (!get_value(&data->is_ready, data))
+		;
 	while (!get_value(&data->is_end, data))
 	{
 		i = 0;
