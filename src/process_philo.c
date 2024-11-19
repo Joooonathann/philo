@@ -6,19 +6,11 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:34 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/18 17:33:47 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:30:12 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	is_ready(t_philo *philo)
-{
-	if (philo->id == (philo->data->ph_total - 1))
-		set_value(&philo->data->is_ready, 1, philo->data);
-	while (!get_value(&philo->data->is_ready, philo->data))
-		;
-}
 
 static void	think_process(t_philo *philo)
 {
@@ -31,7 +23,7 @@ static void	eat_process(t_philo *philo)
 	write_status(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->right_fork->fork);
 	write_status(philo, "has taken a fork");
-	philo->last_meal = get_time();
+	set_time(&philo->last_meal, get_time(), philo->data);
 	philo->meals_total++;
 	write_status(philo, "is eating");
 	usleep(philo->data->time_to_eat * 1000);
@@ -50,7 +42,6 @@ void	*process_philo(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	is_ready(philo);
 	if (philo->data->ph_total == 1)
 	{
 		write_status(philo, "is thinking");

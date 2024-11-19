@@ -1,6 +1,6 @@
 NAME 		= 	philo
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror $(INCLUDE)
+CFLAGS		=	-Wall -Wextra -Werror -g3 $(INCLUDE)
 INCLUDE 	=	-I include
 
 SRC			=	./src/is_valid_input.c\

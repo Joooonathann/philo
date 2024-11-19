@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 12:05:52 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/14 12:22:55 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:16:44 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ int	get_value(int *value, t_data *data)
 }
 
 void	set_value(int *value, int new, t_data *data)
+{
+	pthread_mutex_lock(&data->mtx_set);
+	*value = new;
+	pthread_mutex_unlock(&data->mtx_set);
+}
+
+void	set_time(long *value, long new, t_data *data)
 {
 	pthread_mutex_lock(&data->mtx_set);
 	*value = new;

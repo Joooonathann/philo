@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:44:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2024/11/18 17:35:29 by jalbiser         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:17:06 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_data
 	long				time_to_eat;
 	long				time_to_sleep;
 	long				meals_total;
+	long				started_time;
 	int					is_end;
 	int					is_ready;
 	pthread_mutex_t		mtx_set;
@@ -76,5 +77,6 @@ void					clean_simulation(t_data *data);
 void					free_simulation(t_data *data);
 int						get_value(int *value, t_data *data);
 void					set_value(int *value, int new, t_data *data);
+void					set_time(long *value, long new, t_data *data);
 
 #endif
